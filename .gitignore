@@ -1,3 +1,4 @@
+config
 terraform/.terraform
 terraform/loadenv.sh
-config
+terraform/terraform.tfstate*
