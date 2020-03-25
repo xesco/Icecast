@@ -1,0 +1,63 @@
+# general options
+icecast_userid: "icecast2"
+icecast_groupid: "icecast"
+icecast_enable: "true"
+icecast_configfile: "/etc/icecast2/icecast.xml"
+
+# config options
+icecast_config:
+  location: "Earth"
+  admin: "icemaster@localhost"
+  limits:
+    clients: 100
+    sources: 2
+    queue_size: 524288
+    client_timeout: 30
+    header_timeout: 15
+    source_timeout: 10
+    burst_on_connect: 1
+    burst_size: 65535
+  authentication:
+    source_password: "hackme"
+    relay_password: "hackme"
+    admin_user: "admin"
+    admin_password: "hackme"
+  shoutcast:
+    custom: false 
+    mount: "/live.nsv"
+  directory:
+    enabled: false
+    yp_url_timeout: 15
+    yp_url: "http://dir.xiph.org/cgi-bin/yp-cgi"
+  hostname: "localhost"
+  listen_sockets:
+    - port: 8000
+    #- port: 8080
+    #  bind_address: "127.0.0.1"
+    #  shouthcast_mount: "/stream"
+    #- port: 8443
+    #  ssl: 1
+  http_headers:
+    - '<header name="Access-Control-Allow-Origin" value="*" />'
+  relaying:
+    master_slave:
+      enabled: false
+      master_server: 127.0.0.1
+      master_server_port: 8001
+      master_update_interval: 120
+      master_password: "hackme"
+      relays_on_demand: 1
+    single_broadcast:
+      enabled: false
+      server: 127.0.0.1
+      port: 8080
+      mount: "/example.ogg"
+      local_mount: "/different.ogg"
+      on_demand: 0
+      relay_shoutcast_metadata: 0
+
+
+
+
+
+

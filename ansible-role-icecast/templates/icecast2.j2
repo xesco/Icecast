@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+
+# Defaults for icecast2 initscript
+# sourced by /etc/init.d/icecast2
+# installed at /etc/default/icecast2 by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Full path to the server configuration file
+CONFIGFILE="{{ icecast_configfile }}"
+
+# Name or ID of the user and group the daemon should run under
+USERID={{ icecast_userid }}
+GROUPID={{ icecast_groupid }}
+
+# Edit /etc/icecast2/icecast.xml and change at least the passwords.
+# Change this to true when done to enable the init.d script
+ENABLE={{ icecast_enable }}

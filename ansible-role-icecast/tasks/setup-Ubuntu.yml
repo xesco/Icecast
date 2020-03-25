@@ -1,0 +1,22 @@
+---
+- name: Install icecast package
+  apt:
+    name: icecast2
+    state: present
+    update_cache: yes
+
+- name: Enable icecast by default
+  template:
+    src: icecast2.j2
+    dest: /etc/default/icecast2
+
+- name: Configure icecast
+  template:
+    src: icecast.xml.j2
+    dest: "{{ icecast_configfile }}"
+
+- name: Start and enable icecast service
+  service:
+    name: icecast2
+    state: restarted
+    enabled: yes
