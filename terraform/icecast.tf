@@ -104,13 +104,17 @@ resource "aws_eip" "icecast_eip" {
 }
 
 resource "aws_instance" "icecast" {
-  #ami = data.aws_ami.ubuntu.id
-  ami = var.aws_ami_id
+  ami = data.aws_ami.ubuntu.id
+  #ami = var.aws_ami_id
   instance_type = var.aws_instance_type
   key_name = aws_key_pair.my_key.key_name
-  associate_public_ip_address = true
   subnet_id = aws_subnet.my_subnet.id
   vpc_security_group_ids = [aws_security_group.icecast_sg.id]
+  disable_api_termination = true
+
+  root_block_device {
+    volume_size = var.aws_root_volume_size
+  }
 
   tags = {
     Name = "Icecast Streaming Server"
