@@ -124,17 +124,37 @@
     <!-- Default settings for all mounts that don't have a specific <mount type="normal">.
     -->
     <!-- 
-    <mount type="default">
-        <public>0</public>
-        <intro>/server-wide-intro.ogg</intro>
-        <max-listener-duration>3600</max-listener-duration>
-        <authentication type="url">
-                <option name="mount_add" value="http://auth.example.org/stream_start.php"/>
+{% for mount in icecast_mounts %}
+    <mount type="{{ mount.mount_type }}">
+{% set _ = mount.pop("mount_type") %}
+{% for k,v in mount.items() %}
+{% if k == "auth" %}
+        <authentication type="{{ v.type }}">
+{% set _ = v.pop("type") %}
+{% for k_auth,v_auth in v.items() %}
+{% if k_auth == "options"%}
+{% for k_opt in v_auth %}
+            {{ k_opt }}
+{% endfor %}
+{% else %}
+            <{{ k_auth|replace('_','-') }}>{{ v_auth }}</{{ k_auth|replace('_','-') }}>
+{% endif %}
+{% endfor %}
         </authentication>
+{% elif k == "http_headers" %}
         <http-headers>
-                <header name="foo" value="bar" />
+{% for header in v %}
+            {{ header }}
+{% endfor %}
         </http-headers>
+{% else %}
+        <{{ k|replace('_','-') }}>{{ v }}</{{ k|replace('_','-') }}>
+{% endif %}
+{% endfor %}
     </mount>
+{% endfor %}
+
+
     -->
 
     <!-- Normal mounts -->

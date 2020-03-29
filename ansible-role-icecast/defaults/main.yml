@@ -64,7 +64,7 @@ icecast_relays: []
 
 # Mount Specific Settings
 icecast_mounts:
-  - type: "default"
+  - mount_type: "default"
     public: 0
     intro: "/server-wide-intro.ogg"
     max_listener_duration: 3600
@@ -74,8 +74,17 @@ icecast_mounts:
         - '<option name="mount_add" value="http://auth.example.org/stream_start.php"/>'
     http_headers:
        - '<header name="foo" value="bar" />'
-  - type: "normal"
-    name: "/example-complex.ogg</mount-name"
+  - mount_type: "normal"
+    mount_name: "/example.ogg"
+    username: "othersource"
+    password: "hackmemore"
+    auth:
+      type: "htpasswd"
+      options:
+        - '<option name="filename" value="myauth"/>'
+        - '<option name="allow_duplicate_users" value="0"/>'
+  - mount_type: "normal"
+    mount_name: "/example-complex.ogg"
     username: "othersource"
     password: "hackmemore"
     max_listeners: 1
@@ -97,11 +106,6 @@ icecast_mounts:
     hidden: 1
     burst_size: 65536
     mp3_metadata_interval: 4096
-    #auth:
-    #  type: "htpasswd"
-    #  options:
-    #    - '<option name="filename" value="myauth"/>'
-    #    - '<option name="allow_duplicate_users" value="0"/>'
     auth:
       type: "url"
       options:
