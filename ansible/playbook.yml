@@ -14,6 +14,16 @@
         icecast_auth_admin_password: "snakeit"
         icecast_hostname: "xesco-icecast.org"
         icecast_location: "Terredembarra"
-        icecast_admin: "icemaster@xesco-icecast.org"
+        icecast_admin: "icemaster@40ena.online"
         icecast_listen_sockets:
           - port: 4040
+        icecast_mounts:
+          - mount_type: "normal"
+            mount_name: "/xesco"
+            auth:
+              type: "htpasswd"
+              options:
+                - '<option name="filename" value="{{ icecast_configdir }}/admin/myauth"/>'
+                - '<option name="allow_duplicate_users" value="0"/>'
+          - mount_type: "normal"
+            mount_name: "aerosoulvoyeur"
