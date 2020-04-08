@@ -82,7 +82,7 @@ icecast_mounts: []
 #    auth:
 #      type: "htpasswd"
 #      options:
-#        - '<option name="filename" value="{{ icecast_configdir }}/auth/example_auth"/>'
+#        - '<option name="filename" value="{{ icecast_configdir }}/admin/example_auth"/>'
 #        - '<option name="allow_duplicate_users" value="0"/>'
 #  - mount_type: "normal"
 #    mount_name: "/example-complex.ogg"
@@ -130,7 +130,28 @@ icecast_mounts: []
 #    on_disconnect: "/home/icecast/bin/source-end"
 
 # Path Settings
+icecast_paths_basedir: "/usr/share/icecast2"
+icecast_paths_logdir: "/var/log/icecast2"
+icecast_paths_webroot: "/usr/share/icecast2/web"
+icecast_paths_adminroot: "/usr/share/icecast2/admin"
+icecast_paths_aliases:
+  - src: "/"
+    dest: "/status.xsl"
+#icecast_paths_pidfile: "/usr/share/icecast2/icecast.pid"
+#icecast_paths_allow_ip: "/path/to/ip_allowlist"
+#icecast_paths_deny_ip: "/path_to_ip_denylist"
+#icecast_paths_ssl_cert: "/usr/share/icecast2/icecast.pem"
+#icecast_paths_ssl_allowed_ciphers: "ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS"
 
 # Logging Settings
+icecast_logging_access_log: "access.log"
+icecast_logging_error_log: "error.log"
+#icecast_logging_playlist_log: "playlist.log"
+icecast_logging_logsize: 10000
+icecast_logging_logarchive: 0
+icecast_logging_loglevel: 3
 
 # Security Settings
+icecast_security_chroot: 0
+#icecast_security_changeowner_user: "nobody"
+#icecast_security_changeowner_group: "nobody"

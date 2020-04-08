@@ -70,9 +70,16 @@
     <!-- You may have multiple <listener> elements -->
     {% for socket in icecast_listen_sockets %}
     <listen-socket>
-        {% for k, v in socket.items() %}
-        <{{ k|replace('_','-') }}>{{ v }}</{{ k|replace('_','-') }}>
-        {% endfor %}
+        <port>{{ socket.port }}</port>
+      {% if 'bind_address' in socket %}
+        <bind-address>{{ socket.bind_address}}</bind_address>
+      {% endif %}
+      {% if 'shoutcast_mount' in socket %}
+        <shoutcast-mount>{{ socket.shoutcast_mount }}</shoutcast-mount>
+      {% endif %}
+      {% if 'ssl' in socket %}
+        <ssl>{{ socket.ssl }}</ssl>
+      {% endif %}
     </listen-socket>
     {% endfor %}
 
@@ -159,54 +166,69 @@
 
     <paths>
         <!-- basedir is only used if chroot is enabled -->
-        <basedir>/usr/share/icecast2</basedir>
+        <basedir>{{ icecast_paths_basedir }}</basedir>
 
         <!-- Note that if <chroot> is turned on below, these paths must both
              be relative to the new root, not the original root -->
-        <logdir>/var/log/icecast2</logdir>
-        <webroot>/usr/share/icecast2/web</webroot>
-        <adminroot>/usr/share/icecast2/admin</adminroot>
-        <!-- <pidfile>/usr/share/icecast2/icecast.pid</pidfile> -->
+        <logdir>{{ icecast_paths_logdir }}</logdir>
+        <webroot>{{ icecast_paths_webroot }}</webroot>
+        <adminroot>{{ icecast_paths_adminroot }}</adminroot>
+        {% if icecast_paths_pidfile is defined %}
+        <pidfile>{{ icecast_paths.pidfile }}</pidfile>
+        {% endif %}
 
         <!-- Aliases: treat requests for 'source' path as being for 'dest' path
              May be made specific to a port or bound address using the "port"
              and "bind-address" attributes.
           -->
-        <!--
-        <alias source="/foo" destination="/bar"/>
-        -->
         <!-- Aliases: can also be used for simple redirections as well,
              this example will redirect all requests for http://server:port/ to
              the status page
         -->
-        <alias source="/" destination="/status.xsl"/>
+        {% for alias in icecast_paths_aliases %}
+        <alias source="{{ alias.src }}" destination="{{ alias.dest }}"/>
+        {% endfor %}
+
         <!-- The certificate file needs to contain both public and private part.
              Both should be PEM encoded.
-        <ssl-certificate>/usr/share/icecast2/icecast.pem</ssl-certificate>
         -->
+        {% if icecast_paths_ssl_cert is defined %}
+        <ssl-certificate>{{ icecast_paths_ssl_cert }}</ssl-certificate>
+        {% endif %}
+        {% if icecast_paths_allow_ip is defined %}
+        <allow-ip>{{ icecast_paths_allow_ip }}</allow-ip>
+        {% endif %}
+        {% if icecast_paths_deny_ip is defined %}
+        <deny-ip>{{ icecast_paths_deny_ip }}</deny-ip>
+        {% endif %}
+        {% if icecast_paths_ssl_allowed_ciphers is defined %}
+        <ssl-allowed-ciphers>{{ icecast_paths_ssl_allowed_ciphers }}</ssl-allowed-ciphers>
+        {% endif %}
     </paths>
 
     <logging>
-        <accesslog>access.log</accesslog>
-        <errorlog>error.log</errorlog>
-        <!-- <playlistlog>playlist.log</playlistlog> -->
-        <loglevel>3</loglevel> <!-- 4 Debug, 3 Info, 2 Warn, 1 Error -->
-        <logsize>10000</logsize> <!-- Max size of a logfile -->
+        <accesslog>{{ icecast_logging_access_log }}</accesslog>
+        <errorlog>{{ icecast_logging_error_log }}</errorlog>
+        {% if icecast_logging_playlist_log is defined %}
+        <playlistlog>{{ icecast_logging_playlist_log }}</playlistlog>
+        {% endif %}
+        <loglevel>{{ icecast_logging_loglevel }}</loglevel> <!-- 4 Debug, 3 Info, 2 Warn, 1 Error -->
+        <logsize>{{ icecast_logging_logsize }}</logsize> <!-- Max size of a logfile -->
         <!-- If logarchive is enabled (1), then when logsize is reached
              the logfile will be moved to [error|access|playlist].log.DATESTAMP,
              otherwise it will be moved to [error|access|playlist].log.old.
              Default is non-archive mode (i.e. overwrite)
         -->
-        <!-- <logarchive>1</logarchive> -->
+        <logarchive>{{ icecast_logging_logarchive }}</logarchive>
     </logging>
 
     <security>
-        <chroot>0</chroot>
-        <!--
+        <chroot>{{ icecast_security_chroot }}</chroot>
+        {% if icecast_security_changeowner_user is defined and icecast_security_changeowner_group is defined %}
         <changeowner>
-            <user>nobody</user>
-            <group>nogroup</group>
+            <user>{{ icecast_security_changeowner_user }}</user>
+            <group>{{ icecast_security_changeowner_group }}</group>
         </changeowner>
-        -->
+        {% endif %}
     </security>
 </icecast>

@@ -17,7 +17,7 @@
         icecast_admin: "icemaster@40ena.online"
         icecast_listen_sockets:
           - port: 4040
-        auth_htpasswd_file: "{{ icecast_configdir }}/auth/xesco"
+        auth_htpasswd_file: "{{ icecast_configdir }}/admin/auth_xesco"
         icecast_mounts:
           - mount_type: "normal"
             mount_name: "/xesco"
