@@ -1,4 +1,4 @@
-# General Options
+## General Options
 icecast_userid: "icecast2"
 icecast_groupid: "icecast"
 icecast_enable: "true"
@@ -8,7 +8,7 @@ icecast_configfile: "{{ icecast_configdir }}/icecast.xml"
 # Check the official documentation
 # http://icecast.org/docs/icecast-2.4.1/config-file.html
 
-# Limits
+## Limits
 icecast_limits_clients: 100
 icecast_limits_sources: 2
 icecast_limits_queue_size: 524288
@@ -18,116 +18,116 @@ icecast_limits_source_timeout: 10
 icecast_limits_burst_on_connect: 1
 icecast_limits_burst_size: 65535
 
-# Authentication
+## Authentication
 icecast_auth_source_password: "hackme"
 icecast_auth_relay_password: "hackme"
 icecast_auth_admin_user: "admin"
 icecast_auth_admin_password: "hackme"
 
-# Stream Directory
+## Stream Directory
 icecast_directory: []
-#  - yp_url_timeout: 15
-#    yp_url: "http://dir.xiph.org/cgi-bin/yp-cgi"
+  #- yp_url_timeout: 15
+  #  yp_url: "http://dir.xiph.org/cgi-bin/yp-cgi"
 
-# Misc
+## Misc
 icecast_hostname: "localhost"
 icecast_location: "Earth"
 icecast_admin: "icemaster@localhost"
 icecast_fileserve: 1
 
-# TCP Ports
+## TCP Ports
 icecast_listen_sockets:
   - port: 8000
-#  - port: 8080
-#    bind_address: "127.0.0.1"
-#    shoutcast_mount: "/stream"
-#  - port: 8443
-#    ssl: 1
+  #- port: 8080
+  #  bind_address: "127.0.0.1"
+  #  shoutcast_mount: "/stream"
+  #- port: 8443
+  #  ssl: 1
 
-# Global HTTP headers
+## Global HTTP headers
 icecast_http_headers:
   - '<header name="Access-Control-Allow-Origin" value="*" />'
 
-# Relaying Streams
+## Relaying Streams
 icecast_relaying: {}
-#  master_server: 127.0.0.1
-#  master_server_port: 8001
-#  master_update_interval: 120
-#  master_password: "hackme"
-#  relays_on_demand: 1
+  #master_server: 127.0.0.1
+  #master_server_port: 8001
+  #master_update_interval: 120
+  #master_password: "hackme"
+  #relays_on_demand: 1
 icecast_relays: []
-#  - server: 127.0.0.1
-#    port: 8080
-#    mount: "/example.ogg"
-#    local_mount: "/different.ogg"
-#    on_demand: 1
-#    relay_shoutcast_metadata: 0
+  #- server: 127.0.0.1
+  #  port: 8080
+  #  mount: "/example.ogg"
+  #  local_mount: "/different.ogg"
+  #  on_demand: 1
+  #  relay_shoutcast_metadata: 0
 
-# Mount Specific Settings
+## Mount Specific Settings
 icecast_mounts: []
-#  - mount_type: "default"
-#    public: 0
-#    intro: "/server-wide-intro.ogg"
-#    max_listener_duration: 3600
-#    auth:
-#      type: "url"
-#      options:
-#        - '<option name="mount_add" value="http://auth.example.org/stream_start.php"/>'
-#    http_headers:
-#       - '<header name="foo" value="bar" />'
-#  - mount_type: "normal"
-#    mount_name: "/example.ogg"
-#    username: "othersource"
-#    password: "hackmemore"
-#    auth:
-#      type: "htpasswd"
-#      options:
-#        - '<option name="filename" value="{{ icecast_configdir }}/admin/example_auth"/>'
-#        - '<option name="allow_duplicate_users" value="0"/>'
-#  - mount_type: "normal"
-#    mount_name: "/example-complex.ogg"
-#    username: "othersource"
-#    password: "hackmemore"
-#    max_listeners: 1
-#    max_listener_duration: 3600
-#    dump_file: "/tmp/dump-example1.ogg"
-#    intro: "/intro.ogg"
-#    fallback_mount: "/example2.ogg"
-#    fallback_override: 1
-#    fallback_when_full: 1
-#    charset: "ISO8859-1"
-#    public: 1
-#    stream_name: "My audio stream"
-#    stream_description: "My audio description"
-#    stream_url: "http://some.place.com"
-#    genre: "classical"
-#    bitrate: 64
-#    type: "application/ogg"
-#    subtype: "vorbis"
-#    hidden: 1
-#    burst_size: 65536
-#    mp3_metadata_interval: 4096
-#    auth:
-#      type: "url"
-#      options:
-#        - '<option name="mount_add" value="http://auth.example.org/stream_start.php"/>'
-#        - '<option name="mount_remove" value="http://auth.example.org/stream_end.php"/>'
-#        - '<option name="listener_add" value="http://auth.example.org/listener_joined.php"/>'
-#        - '<option name="listener_remove" value="http://auth.example.org/listener_left.php"/>'
-#        - '<option name="username" value="user"/>'
-#        - '<option name="password" value="pass"/>'
-#        - '<option name="auth_header" value="icecast-auth-user: 1"/>'
-#        - '<option name="timelimit_header" value="icecast-auth-timelimit:"/>'
-#        - '<option name="headers" value="x-pragma,x-token"/>'
-#        - '<option name="header_prefix" value="ClientHeader."/>'
-#        - '<option name="stream_auth" value="http://auth.example.org/source.php"/>'
-#    http_headers:
-#      - '<header name="Access-Control-Allow-Origin" value="*" />'
-#      - '<header name="X-Robots-Tag" value="index, noarchive" />'
-#      - '<header name="foo" value="bar" status="200" />'
-#      - '<header name="Nelson" value="Ha-Ha!" status="404" />'
-#    on_connect: "/home/icecast/bin/source-start"
-#    on_disconnect: "/home/icecast/bin/source-end"
+  #- mount_type: "default"
+  #  public: 0
+  #  intro: "/server-wide-intro.ogg"
+  #  max_listener_duration: 3600
+  #  auth:
+  #    type: "url"
+  #    options:
+  #      - '<option name="mount_add" value="http://auth.example.org/stream_start.php"/>'
+  #  http_headers:
+  #     - '<header name="foo" value="bar" />'
+  #- mount_type: "normal"
+  #  mount_name: "/example.ogg"
+  #  username: "othersource"
+  #  password: "hackmemore"
+  #  auth:
+  #    type: "htpasswd"
+  #    options:
+  #      - '<option name="filename" value="{{ icecast_configdir }}/admin/example_auth"/>'
+  #      - '<option name="allow_duplicate_users" value="0"/>'
+  #- mount_type: "normal"
+  #  mount_name: "/example-complex.ogg"
+  #  username: "othersource"
+  #  password: "hackmemore"
+  #  max_listeners: 1
+  #  max_listener_duration: 3600
+  #  dump_file: "/tmp/dump-example1.ogg"
+  #  intro: "/intro.ogg"
+  #  fallback_mount: "/example2.ogg"
+  #  fallback_override: 1
+  #  fallback_when_full: 1
+  #  charset: "ISO8859-1"
+  #  public: 1
+  #  stream_name: "My audio stream"
+  #  stream_description: "My audio description"
+  #  stream_url: "http://some.place.com"
+  #  genre: "classical"
+  #  bitrate: 64
+  #  type: "application/ogg"
+  #  subtype: "vorbis"
+  #  hidden: 1
+  #  burst_size: 65536
+  #  mp3_metadata_interval: 4096
+  #  auth:
+  #    type: "url"
+  #    options:
+  #      - '<option name="mount_add" value="http://auth.example.org/stream_start.php"/>'
+  #      - '<option name="mount_remove" value="http://auth.example.org/stream_end.php"/>'
+  #      - '<option name="listener_add" value="http://auth.example.org/listener_joined.php"/>'
+  #      - '<option name="listener_remove" value="http://auth.example.org/listener_left.php"/>'
+  #      - '<option name="username" value="user"/>'
+  #      - '<option name="password" value="pass"/>'
+  #      - '<option name="auth_header" value="icecast-auth-user: 1"/>'
+  #      - '<option name="timelimit_header" value="icecast-auth-timelimit:"/>'
+  #      - '<option name="headers" value="x-pragma,x-token"/>'
+  #      - '<option name="header_prefix" value="ClientHeader."/>'
+  #      - '<option name="stream_auth" value="http://auth.example.org/source.php"/>'
+  #  http_headers:
+  #    - '<header name="Access-Control-Allow-Origin" value="*" />'
+  #    - '<header name="X-Robots-Tag" value="index, noarchive" />'
+  #    - '<header name="foo" value="bar" status="200" />'
+  #    - '<header name="Nelson" value="Ha-Ha!" status="404" />'
+  #  on_connect: "/home/icecast/bin/source-start"
+  #  on_disconnect: "/home/icecast/bin/source-end"
 
 # Path Settings
 icecast_paths_basedir: "/usr/share/icecast2"
