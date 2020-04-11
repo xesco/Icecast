@@ -2,3 +2,4 @@ config
 terraform/.terraform
 terraform/loadenv.sh
 terraform/terraform.tfstate*
+ansible/.vagrant

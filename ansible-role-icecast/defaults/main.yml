@@ -49,12 +49,12 @@ icecast_http_headers:
   - '<header name="Access-Control-Allow-Origin" value="*" />'
 
 ## Relaying Streams
-icecast_relaying: {}
-  #master_server: 127.0.0.1
-  #master_server_port: 8001
-  #master_update_interval: 120
-  #master_password: "hackme"
-  #relays_on_demand: 1
+#icecast_relaying_master_server: 127.0.0.1
+#icecast_relaying_master_server_port: 8001
+#icecast_relaying_master_update_interval: 120
+#icecast_relaying_master_password: "hackme"
+#icecast_relaying_master_relays_on_demand: 1
+
 icecast_relays: []
   #- server: 127.0.0.1
   #  port: 8080

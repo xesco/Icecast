@@ -102,16 +102,24 @@
          You don't need this if you only have one server.
          Please refer to the config for a detailed explanation.
     -->
-    {% if icecast_relaying %}
-    <master-server>{{ icecast_relaying.master_server }}</master-server>
-    <master-server-port>{{ icecast_relaying.master_server_port }}</master-server-port>
-    <master-update-interval>{{ icecast_relaying.master_update_interval }}</master-update-interval>
-    <master-password>{{ icecast_relaying.master_password }}</master-password>
+    {% if icecast_relaying_master_server is defined %}
+    <master-server>{{ icecast_relaying_master_server }}</master-server>
+    {% endif %}
+    {% if icecast_relaying_master_server_port is defined %}
+    <master-server-port>{{ icecast_relaying_master_server_port }}</master-server-port>
+    {% endif %}
+    {% if icecast_relaying_master_update_interval is defined %}
+    <master-update-interval>{{ icecast_relaying_master_update_interval }}</master-update-interval>
+    {% endif %}
+    {% if icecast_relaying_master_password is defined %}
+    <master-password>{{ icecast_relaying_master_password }}</master-password>
+    {% endif %}
 
     <!-- setting this makes all relays on-demand unless overridden, this is
          useful for master relays which do not have <relay> definitions here.
          The default is 0 -->
-    <relays-on-demand>{{ icecast_relaying.relays_on_demand }}</relays-on-demand>
+    {% if icecast_relaying_master_relays_on_demand is defined %}
+    <relays-on-demand>{{ icecast_relaying_master_relays_on_demand }}</relays-on-demand>
     {% endif %}
 
     {% for relay in icecast_relays %}

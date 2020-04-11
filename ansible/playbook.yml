@@ -1,9 +1,8 @@
 ---
 - name: Playbook to install Icecast
-  hosts: Icecast
+  hosts: all
   remote_user: ubuntu
   become: true
-  vars:
 
   roles:
     - role: ansible-role-icecast
