@@ -5,18 +5,18 @@
     state: present
     update_cache: yes
 
-- name: Enable icecast by default
+- name: Enable icecast (disabled system wide by default)
   template:
     src: icecast2.j2
     dest: /etc/default/icecast2
 
-- name: Configure icecast
+- name: Generate icecast.xml file
   template:
     src: icecast.xml.j2
     dest: "{{ icecast_configfile }}"
+  notify: restart icecast
 
-- name: Start and enable icecast service
+- name: Enable icecast service
   service:
     name: icecast2
-    state: restarted
     enabled: yes

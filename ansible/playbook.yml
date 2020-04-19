@@ -1,29 +1,10 @@
 ---
-- name: Playbook to install Icecast
-  hosts: all
-  remote_user: ubuntu
+- hosts: all
   become: true
+  remote_user: ubuntu
+
+  vars_files:
+    - vars.yml
 
   roles:
     - role: ansible-role-icecast
-      vars:
-        icecast_limits_clients: 500
-        icecast_limits_sources: 10
-        icecast_auth_source_password: "snakeit"
-        icecast_auth_admin_password: "snakeit"
-        icecast_hostname: "xesco-icecast.org"
-        icecast_location: "Terredembarra"
-        icecast_admin: "icemaster@40ena.online"
-        icecast_listen_sockets:
-          - port: 4040
-        auth_htpasswd_file: "{{ icecast_configdir }}/admin/auth_xesco"
-        icecast_mounts:
-          - mount_type: "normal"
-            mount_name: "/xesco"
-            auth:
-              type: "htpasswd"
-              options:
-                - '<option name="filename" value="{{ auth_htpasswd_file }}"/>'
-                - '<option name="allow_duplicate_users" value="0"/>'
-          - mount_type: "normal"
-            mount_name: "aerosoulvoyeur"
